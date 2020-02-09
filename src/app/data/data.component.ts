@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppData} from '../app.component';
 
 @Component({
@@ -8,10 +8,15 @@ import {AppData} from '../app.component';
 })
 export class DataComponent implements OnInit {
 
-  @Input() data: AppData
+  @Input() data: AppData;
+  @Output() onRemove = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  removeData() {
+    this.onRemove.emit(this.data.id);
   }
 
 }

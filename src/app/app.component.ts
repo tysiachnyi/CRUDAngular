@@ -21,4 +21,8 @@ export class AppComponent {
     updateData(newData: AppData) {
         this.data.unshift(newData);
     }
+
+    removePost(id: number) {
+        this.data = this.data.filter(d => d.id !== id);
+    }
 }
