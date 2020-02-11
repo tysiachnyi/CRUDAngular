@@ -1,7 +1,9 @@
 <div class="container">
-    <div class="card lien">
+    <div  class="card lien">
+      <small>Number of el: <b>{{data.id}}</b></small>
+      <br>
         <h2>{{data.title}}</h2>
-        <p>{{data.comment}}</p>
+        <p>{{data.body}}</p>
         <div class="container">
             <button (click)="removeData()" class="btn">Delete</button>
             <button class="btn">Edit</button>

@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable, observable} from 'rxjs';
+import {delay, tap} from 'rxjs/operators';
 
 export interface AppData {
   title: string;
-  comment: string;
+  body: string;
   id?: number;
 }
 
@@ -11,18 +14,35 @@ export interface AppData {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-    title = 'my App';
-    data: AppData[] = [
-        {title: 'First data', comment: 'First comment', id: 1},
-        {title: 'Second data', comment: 'Second comment', id: 2}
-  ];
+export class AppComponent implements OnInit {
 
-    updateData(newData: AppData) {
+  public loading = true;
+    search = '';
+    searchField = 'title'
+    title = 'my App';
+    data: AppData[] = [];
+
+    constructor(private http: HttpClient) {}
+
+      fetchData(): Observable<AppData[]> {
+        return this.http.get<AppData[]>('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          .pipe(tap(datas => this.data = datas));
+      }
+
+
+  updateData(newData: AppData) {
         this.data.unshift(newData);
     }
 
     removePost(id: number) {
         this.data = this.data.filter(d => d.id !== id);
+    }
+
+    ngOnInit(): void {
+      this.fetchData()
+        .pipe(delay(500))
+        .subscribe(() => {
+        this.loading = false;
+      });
     }
 }

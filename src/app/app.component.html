@@ -6,10 +6,18 @@
         (addData)="updateData($event)"
 
 ></app-data-form>
+<div *ngIf="!loading">
+<div class="container">
+  <input type="text" [(ngModel)]="search" [placeholder]="'Search by ' + searchField">
+  <button class="btn" (click)="searchField = 'title'">Title</button>
+  <button class="btn" (click)="searchField = 'comment'">Comment</button>
+</div>
 <app-data
-        *ngFor="let d of data"
+        *ngFor="let d of data | filter:search:searchField"
         [data]='d'
         (onRemove)="removePost($event)"
 
 ></app-data>
+</div>
+<h2 class="container" *ngIf="loading">Loading... </h2>
 
