@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {AppData} from "../app.component";
+import {AppData} from '../app.component';
 
 @Pipe({
   name: 'filter',

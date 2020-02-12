@@ -7,13 +7,15 @@ import { DataComponent } from './data/data.component';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
 import {HttpClientModule} from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataFormComponent,
     DataComponent,
-    FilterPipe
+    FilterPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

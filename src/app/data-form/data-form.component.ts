@@ -10,7 +10,7 @@ export class DataFormComponent implements OnInit {
 
   @Output() addData: EventEmitter<AppData> = new EventEmitter<AppData>();
   title = ''
-  comment = ''
+  body = ''
 
   constructor() { }
 
@@ -18,13 +18,13 @@ export class DataFormComponent implements OnInit {
   }
 
   clickAddBtn() {
-    if (this.title.trim() && this.comment.trim()) {
+    if (this.title.trim() && this.body.trim()) {
       const data: AppData = {
         title: this.title,
-        comment: this.comment
+        body: this.body
       };
       this.addData.emit(data);
-      this.title = this.comment = '';
+      this.title = this.body = '';
       }
     }
 }
